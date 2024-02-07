@@ -1,0 +1,16 @@
+pydantic
+langchain
+tiktoken
+openai
+fastapi
+python-dotenv
+uuid
+streamlit
+streamlit-feedback
+langserve
+langchain-openai
+langgraph
+langchain-community
+langchain_experimental
+gunicorn
+dashscope
