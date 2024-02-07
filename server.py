@@ -41,7 +41,7 @@ def fix_image(upload):
         {
             "messages": [
                 HumanMessage(
-                    content="http://s7xl013pd.hn-bkt.clouddn.com/my-python-logo.png"
+                    content="http://s7xl013pd.hn-bkt.clouddn.com/" + image_name
                 )
             ]
         }
