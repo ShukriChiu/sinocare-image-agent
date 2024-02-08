@@ -1,5 +1,6 @@
 import os
 import uuid
+from cProfile import label
 
 import streamlit as st
 from langchain_community.document_loaders.image import UnstructuredImageLoader
@@ -27,6 +28,7 @@ MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
 
 def fix_image(upload):
     image = Image.open(upload)
+    st.image(image)
     image_name = str(uuid.uuid4()) + ".png"
     image.save(image_name)
     bucket_name = "sinocare-image"
@@ -49,8 +51,7 @@ def fix_image(upload):
     st.markdown(response["output"])
 
 
-col1, col2 = st.columns(2)
-my_upload = st.sidebar.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
+my_upload = st.file_uploader(label="上传图片", type=["png", "jpg", "jpeg"])
 
 if my_upload is not None:
     if my_upload.size > MAX_FILE_SIZE:

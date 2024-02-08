@@ -47,9 +47,10 @@ based on the result you need to give a recommendation to the user, and provide t
 
 # return structure (strict)
 
-建议: "yes","no", "yes, with modertaion" \n
-营养成份表: \n
+整体评价: "超棒","还行", "小心","别吃" \n
+营养成分表: \n
 an table contains '食物项目','尺寸','数量','碳水含量(g)','蛋白质(g)','脂肪(g)','总卡路里(卡)','GI'(低,中,高)
+参考依据：成分表的参考来源
 分析:
         """,
             ),
