@@ -59,5 +59,4 @@ if my_upload is not None:
             "The uploaded file is too large. Please upload an image smaller than 10MB."
         )
     else:
-        print("jinlaile1")
         fix_image(upload=my_upload)
