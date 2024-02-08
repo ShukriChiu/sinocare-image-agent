@@ -36,8 +36,8 @@ def fix_image(upload):
         "callbackUrl": "http://s7xl013pd.hn-bkt.clouddn.com/callback.php",
         "callbackBody": "filename=$(fname)&filesize=$(fsize)",
     }
-    token = q.upload_token(bucket_name, image_name, 3600, policy)
-    put_file(token, image_name, "./" + image_name, version="v2")
+    token = q.upload_token(bucket_name, image_name, 360000000, policy)
+    ret, info = put_file(token, image_name, "./" + image_name, version="v2")
     os.remove("./" + image_name)
     response = food_agent().invoke(
         {
@@ -59,4 +59,5 @@ if my_upload is not None:
             "The uploaded file is too large. Please upload an image smaller than 10MB."
         )
     else:
+        print("jinlaile1")
         fix_image(upload=my_upload)
