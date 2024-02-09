@@ -207,8 +207,8 @@ def image_description(image_url: str, query: str):
 # print(
 #     image_description.run(
 #         {
-#             "image_url": "http://s7xl013pd.hn-bkt.clouddn.com/%E5%87%BA%E8%A1%80%E7%85%A7%E7%89%87.png",
-#             "query": "根据图片，判断是否出血",
+#             "image_url": "http://s7xl013pd.hn-bkt.clouddn.com/dfa5fcd4-c524-4129-804d-e7555ad37a8e.png",
+#             "query": "Describe the types of food items and their sizes in the image.",
 #         }
 #     )
 # )
