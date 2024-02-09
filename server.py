@@ -50,5 +50,5 @@ def fix_image(upload):
 
 my_upload = st.file_uploader(label="上传图片", type=["png", "jpg", "jpeg"])
 
-
-fix_image(upload=my_upload)
+if my_upload is not None:
+    fix_image(upload=my_upload)
