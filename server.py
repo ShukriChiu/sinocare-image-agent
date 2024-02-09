@@ -23,9 +23,6 @@ q = Auth(
 )
 
 
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10MB
-
-
 def fix_image(upload):
     image = Image.open(upload)
     st.image(image)
@@ -53,10 +50,5 @@ def fix_image(upload):
 
 my_upload = st.file_uploader(label="上传图片", type=["png", "jpg", "jpeg"])
 
-if my_upload is not None:
-    if my_upload.size > MAX_FILE_SIZE:
-        st.error(
-            "The uploaded file is too large. Please upload an image smaller than 10MB."
-        )
-    else:
-        fix_image(upload=my_upload)
+
+fix_image(upload=my_upload)
