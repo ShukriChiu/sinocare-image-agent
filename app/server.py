@@ -1,7 +1,10 @@
+from dotenv import find_dotenv, load_dotenv
 from fastapi import FastAPI
 from food_agent import food_agent
 from langchain.pydantic_v1 import BaseModel
 from langserve import add_routes
+
+_ = load_dotenv(find_dotenv(), override=True)
 
 app = FastAPI(
     title="Sinocare Image Agent",
