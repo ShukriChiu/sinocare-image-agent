@@ -2,7 +2,7 @@
 
 FROM python:3.11
 
-WORKDIR /code
+WORKDIR /code/app
 
 COPY ./requirements.txt /code/requirements.txt
 # RUN pip config set global.index-url http://mirrors.aliyun.com/pypi/simple
@@ -47,4 +47,4 @@ COPY . /code
 
 EXPOSE 8080 
 
-CMD exec uvicorn app.server:app --host 0.0.0.0 --port $PORT
+CMD exec uvicorn server:app --host 0.0.0.0 --port $PORT
