@@ -1,9 +1,7 @@
 [build]
 builder = "DOCKERFILE"
-buildCommand = "echo building!"
 
 [deploy]
-startCommand = "echo starting!"
 healthcheckPath = "/"
 healthcheckTimeout = 100
 restartPolicyType = "never"
