@@ -15,4 +15,4 @@ COPY . /code
 
 EXPOSE 8080 
 
-CMD ["langchain", "serve", "--host 0.0.0.0", "--port $PORT"]
+CMD ["uvicorn", "server:app", "--host 0.0.0.0", "--port $PORT"]
