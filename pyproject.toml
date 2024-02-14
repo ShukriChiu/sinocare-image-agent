@@ -1,3 +1,5 @@
+#poetry export --without-hashes --without-urls | awk '{ print $1 }' FS=';' > requirements.txt
+
 [tool.poetry]
 name = "sinocare-image-agent"
 version = "0.1.0"
@@ -19,12 +21,12 @@ streamlit-feedback = "*"
 langserve = { version = "*", extras = ["all"] }
 langchain-openai = "*"
 langgraph = "*"
+langchain-cli = "*"
 langchain-community = "*"
 langchain_experimental = "*"
 gunicorn = "*"
 dashscope = "*"
 qiniu = "*"
-
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.23.2"
