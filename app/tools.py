@@ -154,7 +154,7 @@ get_drug_info = StructuredTool.from_function(
 
 def get_food_info_tool(query: str) -> List[Document]:
     # Your code here
-    return ""
+    return []
 
 
 get_food_info = StructuredTool.from_function(
@@ -167,7 +167,7 @@ get_food_info = StructuredTool.from_function(
 
 def get_exercise_info_tool(query: str) -> List[Document]:
     # Your code here
-    return ""
+    return []
 
 
 get_exercise_info = StructuredTool.from_function(
@@ -207,7 +207,7 @@ def image_description(image_url: str, query: str):
 # print(
 #     image_description.run(
 #         {
-#             "image_url": "http://s7xl013pd.hn-bkt.clouddn.com/18e3ca0c-8bbf-4547-98b5-3312c752299a.png",
+#             "image_url": "http://s7xl013pd.hn-bkt.clouddn.com/2568afe6-c8eb-40fc-87f8-cbbf9669c10d.png",
 #             "query": "Describe the main food items and their sizes in the image.",
 #         }
 #     )

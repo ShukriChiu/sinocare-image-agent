@@ -103,11 +103,11 @@ def initialize_openai_gpt4() -> ChatOpenAI:
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     HELICONE_API_KEY = os.getenv("HELICONE_API_KEY")
     llm = ChatOpenAI(
-        openai_api_key=OPENAI_API_KEY,
+        api_key=OPENAI_API_KEY,
         model="gpt-4-turbo-preview",
         temperature=0.3,
         model_kwargs={"extra_headers": {"Helicone-Auth": f"Bearer {HELICONE_API_KEY}"}},
-        openai_api_base="https://oai.hconeai.com/v1",
+        base_url="https://oai.hconeai.com/v1",
     )
     return llm
 
@@ -116,10 +116,10 @@ def initialize_openai_gpt35() -> ChatOpenAI:
     OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
     HELICONE_API_KEY = os.getenv("HELICONE_API_KEY")
     llm = ChatOpenAI(
-        openai_api_key=OPENAI_API_KEY,
+        api_key=OPENAI_API_KEY,
         model="gpt-3.5-turbo-0125",
         temperature=0.3,
         model_kwargs={"extra_headers": {"Helicone-Auth": f"Bearer {HELICONE_API_KEY}"}},
-        openai_api_base="https://oai.hconeai.com/v1",
+        base_url="https://oai.hconeai.com/v1",
     )
     return llm
