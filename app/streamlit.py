@@ -1,16 +1,14 @@
 import os
 import uuid
-from cProfile import label
 
 import streamlit as st
+from food_agent import food_agent
 from langchain_community.document_loaders.image import UnstructuredImageLoader
 from langchain_core.messages import (
     HumanMessage,
 )
 from PIL import Image
 from qiniu import Auth, etag, put_file
-
-from app.food_agent import food_agent
 
 st.set_page_config(layout="wide", page_title="Sinocare Diabetes Diet Assistant")
 
