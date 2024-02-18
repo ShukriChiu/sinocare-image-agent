@@ -35,13 +35,7 @@ def fix_image(upload):
     ret, info = put_file(token, image_name, "./" + image_name, version="v2")
     os.remove("./" + image_name)
     response = food_agent().invoke(
-        {
-            "messages": [
-                HumanMessage(
-                    content="http://s7xl013pd.hn-bkt.clouddn.com/" + image_name
-                )
-            ]
-        }
+        {"input": "http://s7xl013pd.hn-bkt.clouddn.com/" + image_name}
     )
     st.markdown(response["output"])
 
