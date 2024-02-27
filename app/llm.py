@@ -60,7 +60,17 @@ def initialize_azure_gpt4() -> AzureChatOpenAI:
             "AZURE_OPENAI_ENDPOINT_WESTUS",
         )
     )
-    return llm_india.with_fallbacks([llm_aus, llm_eastus1, llm_westus])
+
+    # 480 RPM
+    llm_scus = AzureChatOpenAI(
+        **get_azure_llm_config(
+            "sinocareGPT-scus-gpt4",
+            "AZURE_OPENAI_API_KEY_SCUS",
+            "AZURE_OPENAI_ENDPOINT_SCUS",
+        )
+    )
+    # return llm_india.with_fallbacks([llm_aus, llm_eastus1, llm_westus])
+    return llm_scus
 
 
 def initialize_azure_gpt35() -> AzureChatOpenAI:
@@ -108,6 +118,7 @@ def initialize_openai_gpt4() -> ChatOpenAI:
         temperature=0.3,
         model_kwargs={"extra_headers": {"Helicone-Auth": f"Bearer {HELICONE_API_KEY}"}},
         base_url="https://oai.hconeai.com/v1",
+        streaming=True,
     )
     return llm
 
@@ -121,5 +132,6 @@ def initialize_openai_gpt35() -> ChatOpenAI:
         temperature=0.3,
         model_kwargs={"extra_headers": {"Helicone-Auth": f"Bearer {HELICONE_API_KEY}"}},
         base_url="https://oai.hconeai.com/v1",
+        streaming=True,
     )
     return llm

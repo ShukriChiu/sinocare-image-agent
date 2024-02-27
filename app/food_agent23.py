@@ -8,16 +8,20 @@ from langchain_core.messages import (
     FunctionMessage,
     HumanMessage,
 )
-from llm import initialize_azure_gpt4
-from tools import food_image_description
+from llm import initialize_openai_gpt4
+from tools import image_description
 
 _ = load_dotenv(find_dotenv(), override=True)
 
+# Choose the LLM that will drivfoode the agent
+# Only certain models support this
+
 
 def food_agent():
-    llm = initialize_azure_gpt4()
+    llm = initialize_openai_gpt4()
 
-    tools = [food_image_description]
+    tools = [image_description]
+    # Construct the OpenAI Tools agent
 
     prompt = ChatPromptTemplate.from_messages(
         [
@@ -35,24 +39,18 @@ based on the result you need to give a recommendation to the user, and provide t
 - 用户信息：45岁，二型糖，5年，无并发症，无胰岛素，口服药物控制，每日运动30分钟
 - 控糖目标：空腹血糖4.4-6.1mmol/L，餐后血糖9 mmol/L以下
 
-# 餐后血糖数据
+# 血糖数据
 cgm data(record every 3 minutes, mmol/L):
 [
     7.5, 7.4, 7.5, 7.8, 8.2, 8.6, 8.9, 9.3, 9.8, 10, 10.3, 10.4, 10.7, 11.2, 11.7, 12.3, 12.5, 13.1, 13.5, 13.6,
     13.4, 13.1, 12.8, 12.4, 12.0, 11.6, 11.1, 10.7, 10.5, 10, 9.6, 9.9, 10.3, 9.8, 9.1, 8.7, 8.6, 8.3, 8.1, 7.6,
-    7.2, 6.9, 7.1, 6.8, 6.9, 7.3, 8.2, 9.9, 8.6, 7.4, 8.2, 9.4, 8.5, 8.4, 7.8, 7.1, 6.8, 5.5, 4.3, 4.0, 4.6, 5.0,
+    7.2, 6.9, 7.1, 6.8, 6.5, 6.3, 6.2, 5.9, 5.6, 5.4, 5.2, 5.4, 5.5, 5.4, 5.2, 5.1, 4.8, 4.5, 4.3, 4.4, 4.6, 5.0,
     5.4, 5.6, 5.7, 5.8, 5.5, 5.1, 4.8, 4.7, 4.8, 5.1, 5.3, 5.2, 5.1, 5.3, 5.2, 5.6, 6, 6.3
 ]
 
-# 技能
-1. 血糖分析能力
-- 能根据用户的餐后血糖数据，精确分析出达峰时间，有几个峰值，超过控糖目标的时间，以及超过目标的幅度，并将这些数据用专业的术语描述出来
-
-2. 饮食分析能力
-- 根据血糖的达标情况，分析出用户的饮食是否合理，是否有超标的食物，以及超标的食物的数量和种类
-
 # workflow
 - firstly construct query to describe the food items and size in the image
+- according to the description, calculate the carbonhydrates
 - 根据用户的血糖反应给出详细的分析和建议
 - return the result with specific structure
 
@@ -93,3 +91,14 @@ if __name__ == "__main__":
         }
     )
     print(result["output"])
+# result = agent_executor.invoke(
+#     {
+#         "messages": [
+#             HumanMessage(
+#                 content="http://s7xl013pd.hn-bkt.clouddn.com/3087.jpg_wh300.jpg"
+#             )
+#         ],
+#     }
+# )
+
+# print(result["output"])
