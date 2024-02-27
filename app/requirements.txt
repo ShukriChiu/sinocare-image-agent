@@ -32,7 +32,7 @@ jsonschema==4.21.1
 langchain-cli==0.0.21 
 langchain-community==0.0.19 
 langchain-core==0.1.22 
-langchain-experimental==0.0.50 
+langchain-experimental==0.0.52 
 langchain-openai==0.0.5 
 langchain==0.1.6 
 langgraph==0.0.24 
