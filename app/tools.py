@@ -195,7 +195,7 @@ def food_image_description(image_url: str):
             "content": [
                 {"image": image_url},
                 {
-                    "text": "`作为一个食物识别专家，描述图片中的所有食物项目及其体积(约多少g),（strict）return a json dict array with the key list - name,volume`"
+                    "text": "作为一个食物识别专家，你的任务是描述图片中的所有食物项目及其体积(约多少g)"
                 },
             ],
         }
@@ -221,7 +221,7 @@ if __name__ == "__main__":
     print(
         food_image_description.run(
             {
-                "image_url": "https://sinocare-food-image.oss-ap-southeast-1.aliyuncs.com/1580203437_56c16762cb33e279f9f4c87b48952389.jpeg"
+                "image_url": "http://food.shujian.ai/a72616bc-4c22-44ec-9443-d2be8731ac3f.png"
             }
         )
     )
