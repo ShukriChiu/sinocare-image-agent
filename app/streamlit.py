@@ -1,7 +1,9 @@
 import os
 import uuid
 
+import oss2
 import streamlit as st
+from dotenv import find_dotenv, load_dotenv
 from food_agent import food_agent
 from langchain_community.document_loaders.image import UnstructuredImageLoader
 from langchain_core.messages import (
@@ -21,21 +23,48 @@ q = Auth(
 )
 
 
+_ = load_dotenv(find_dotenv(), override=True)
+accessKeyId = os.getenv("OSS_ACCESS_KEY_ID")
+accessKeySecret = os.getenv("OSS_ACCESS_KEY_SECRET")
+
+# 使用环境变量中获取的RAM用户的访问密钥配置访问凭证。
+auth = oss2.Auth(accessKeyId, accessKeySecret)
+# yourEndpoint填写Bucket所在地域对应的Endpoint。以华东1（杭州）为例，Endpoint填写为https://oss-cn-hangzhou.aliyuncs.com。
+endpoint = "https://oss-ap-southeast-1.aliyuncs.com"
+
+# 填写Bucket名称。
+bucket = oss2.Bucket(auth, endpoint, "sinocare-food-image")
+# qiniu yun
+# def fix_image(upload):
+#     image = Image.open(upload)
+#     st.image(image)
+#     image_name = str(uuid.uuid4()) + ".png"
+#     image.save(image_name)
+#     bucket_name = "sinocare-food-image"
+#     policy = {
+#         "callbackUrl": "http://food.shujian.ai/callback.php",
+#         "callbackBody": "filename=$(fname)&filesize=$(fsize)",
+#     }
+#     token = q.upload_token(bucket_name, image_name, 360000000, policy)
+#     ret, info = put_file(token, image_name, "./" + image_name, version="v2")
+#     os.remove("./" + image_name)
+#     response = food_agent().invoke(
+#         {"input": "用户上传食物照片:http://food.shujian.ai/" + image_name}
+#     )
+#     st.markdown(response["output"])
+
+# aliyun oss
+
+
 def fix_image(upload):
     image = Image.open(upload)
     st.image(image)
     image_name = str(uuid.uuid4()) + ".png"
     image.save(image_name)
-    bucket_name = "sinocare-image"
-    policy = {
-        "callbackUrl": "http://s7xl013pd.hn-bkt.clouddn.com/callback.php",
-        "callbackBody": "filename=$(fname)&filesize=$(fsize)",
-    }
-    token = q.upload_token(bucket_name, image_name, 360000000, policy)
-    ret, info = put_file(token, image_name, "./" + image_name, version="v2")
+    bucket.put_object_from_file(image_name, "./" + image_name)
     os.remove("./" + image_name)
     response = food_agent().invoke(
-        {"input": "http://s7xl013pd.hn-bkt.clouddn.com/" + image_name}
+        {"input": "用户上传食物照片:http://food.shujian.ai/" + image_name}
     )
     st.markdown(response["output"])
 

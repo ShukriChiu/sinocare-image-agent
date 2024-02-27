@@ -179,14 +179,24 @@ get_exercise_info = StructuredTool.from_function(
 
 
 @tool
-def image_description(image_url: str, query: str):
-    """userful when you needs to deal with a image url, you need to construct query to describe image or extract infomation from image"""
+def food_image_description(image_url: str):
+    """
+    Userful when you need to deal with a food image, generates a detailed description of the main food items and their sizes in the given image.
+
+    Args:
+        image_url (str): The URL of the image to be described.
+
+    Returns:
+        str: The description of the main food items and their sizes in the image.
+    """
     messages = [
         {
             "role": "user",
             "content": [
                 {"image": image_url},
-                {"text": query},
+                {
+                    "text": "`作为一个食物识别专家，描述图片中的所有食物项目及其体积(约多少g),（strict）return a json dict array with the key list - name,volume`"
+                },
             ],
         }
     ]
@@ -194,6 +204,9 @@ def image_description(image_url: str, query: str):
     response = dashscope.MultiModalConversation.call(
         model="qwen-vl-max", messages=messages
     )
+    # response = dashscope.MultiModalConversation.call(
+    #     model=dashscope.MultiModalConversation.Models.qwen_vl_chat_v1, messages=messages
+    # )
     # The response status_code is HTTPStatus.OK indicate success,
     # otherwise indicate request is failed, you can get error code
     # and message from code and message.
@@ -204,14 +217,11 @@ def image_description(image_url: str, query: str):
         print(response.message)  # The error message.
 
 
-# print(
-#     image_description.run(
-#         {
-#             "image_url": "http://s7xl013pd.hn-bkt.clouddn.com/2568afe6-c8eb-40fc-87f8-cbbf9669c10d.png",
-#             "query": "Describe the main food items and their sizes in the image.",
-#         }
-#     )
-# )
-# print(get_drug_info.run("metformin"))
-
-# print(get_device_info.run("存储温度"))
+if __name__ == "__main__":
+    print(
+        food_image_description.run(
+            {
+                "image_url": "https://sinocare-food-image.oss-ap-southeast-1.aliyuncs.com/1580203437_56c16762cb33e279f9f4c87b48952389.jpeg"
+            }
+        )
+    )

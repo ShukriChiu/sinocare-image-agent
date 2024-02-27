@@ -27,6 +27,7 @@ langchain_experimental = "*"
 gunicorn = "*"
 dashscope = "*"
 qiniu = "*"
+oss2 = "*"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.23.2"
