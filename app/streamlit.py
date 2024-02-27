@@ -10,17 +10,18 @@ from langchain_core.messages import (
     HumanMessage,
 )
 from PIL import Image
-from qiniu import Auth, etag, put_file
+
+# from qiniu import Auth, etag, put_file
 
 st.set_page_config(layout="wide", page_title="Sinocare Diabetes Diet Assistant")
 
 st.title("糖尿病饮食助手")
 st.subheader("上传一张图片，我们将为您分析图片中的食物并为您提供饮食建议。")
 
-q = Auth(
-    os.getenv("QINIU_AK"),
-    os.getenv("QINIU_SK"),
-)
+# q = Auth(
+#     os.getenv("QINIU_AK"),
+#     os.getenv("QINIU_SK"),
+# )
 
 
 _ = load_dotenv(find_dotenv(), override=True)
